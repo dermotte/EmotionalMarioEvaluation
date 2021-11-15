@@ -6,21 +6,21 @@ argument_parser = argparse.ArgumentParser(description="The evaluation script for
 argument_parser.add_argument("-i", "--input-path", type=str, default=None)
 argument_parser.add_argument("-o", "--output-path", type=str, default=None)
 
-infiles = """D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.5/participant2_Method1.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.5/participant2_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.5/participant4_Method1.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.5/participant4_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.5/participant7_Method1.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.5/participant7_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.7/participant2_Method1.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.7/participant2_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.7/participant4_Method1.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.7/participant4_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.7/participant7_Method1.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.7/participant7_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.9/participant2_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.9/participant4_Method2.csv
-D:/Daten/GoogleDrive/Projekte/MediaEval/EmotionalMario 2021/submissions/team_gse/new0.9/participant7_Method2.csv
+infiles = """/d/DataSets/EmotionalMario21/runs/team_gse/new0.5/participant2_Method1.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.5/participant2_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.5/participant4_Method1.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.5/participant4_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.5/participant7_Method1.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.5/participant7_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.7/participant2_Method1.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.7/participant2_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.7/participant4_Method1.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.7/participant4_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.7/participant7_Method1.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.7/participant7_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.9/participant2_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.9/participant4_Method2.json
+/d/DataSets/EmotionalMario21/runs/team_gse/new0.9/participant7_Method2.json
 """
 
 def convert(input_path, output_path):
