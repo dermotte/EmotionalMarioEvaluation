@@ -9,7 +9,7 @@ argument_parser = argparse.ArgumentParser(
 argument_parser.add_argument("-i", "--run-path", type=str, default=None)
 argument_parser.add_argument("-t", "--truth-path", type=str, default=None)
 
-infiles = """D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.5\\participant2_Method1.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json  05m1
+infiles_gse = """D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.5\\participant2_Method1.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json  05m1
 D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.5\\participant2_Method2.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json  05m2
 D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.5\\participant4_Method1.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json  05m1
 D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.5\\participant4_Method2.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json  05m2
@@ -21,6 +21,10 @@ D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.7\\participant7_Method2.jso
 D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.9\\participant2_Method2.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json  09m2
 D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.9\\participant4_Method2.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json  09m2
 D:\\DataSets\\EmotionalMario21\\runs\\team_gse\\new0.9\\participant7_Method2.json    D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json  09m2"""
+
+infiles_dcu = """D:\\DataSets\\EmotionalMario21\\runs\\team_dcu\\participant_2.json  D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json    run1
+D:\\DataSets\\EmotionalMario21\\runs\\team_dcu\\participant_4.json  D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json    run1
+D:\\DataSets\\EmotionalMario21\\runs\\team_dcu\\participant_7.json  D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json    run1"""
 
 def evaluate(run, truth, df, runid="undefined", filename="undefined", max_distance=25):
     # compare everyone with everything ...
@@ -35,7 +39,8 @@ def evaluate(run, truth, df, runid="undefined", filename="undefined", max_distan
         curr_run_evt = None
         for run_evt in run:
             distance = abs(truth_evt['frame_number'] - run_evt['frame_number'])
-            if abs(truth_evt['frame_number'] - run_evt['frame_number']) < curr_dist and truth_evt['event'] == run_evt['event']:
+            if abs(truth_evt['frame_number'] - run_evt['frame_number']) < curr_dist:
+            # if abs(truth_evt['frame_number'] - run_evt['frame_number']) < curr_dist and truth_evt['event'] == run_evt['event']:
                 curr_run_evt = truth_evt
                 curr_dist = distance
         if curr_run_evt is not None:  # add it to the list if it is considered a find
@@ -75,7 +80,7 @@ if __name__ == '__main__':
     # print("run identifier, file, events in run, events in truth, number of matches, avg. distance, precision, recall, f1 score")
     df = pd.DataFrame(columns="run identifier, file, events in run, events in truth, number of matches, avg. distance, precision, recall, f1 score".split(sep=", "))
     my_max_distance = 25
-    for input_path in infiles.split('\n'):
+    for input_path in infiles_dcu.split('\n'):
         tmp = input_path.strip().split()
 
         f1 = open(tmp[0])
