@@ -26,6 +26,22 @@ infiles_dcu = """D:\\DataSets\\EmotionalMario21\\runs\\team_dcu\\participant_2.j
 D:\\DataSets\\EmotionalMario21\\runs\\team_dcu\\participant_4.json  D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json    run1
 D:\\DataSets\\EmotionalMario21\\runs\\team_dcu\\participant_7.json  D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json    run1"""
 
+infiles_random = """D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_2_run01.json D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json run01
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_4_run01.json D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json run01
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_7_run01.json D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json run01
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_2_run02.json D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json run02
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_4_run02.json D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json run02
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_7_run02.json D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json run02
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_2_run03.json D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json run03
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_4_run03.json D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json run03
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_7_run03.json D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json run03
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_2_run04.json D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json run04
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_4_run04.json D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json run04
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_7_run04.json D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json run04
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_2_run05.json D:\\DataSets\\EmotionalMario21\\truth\\participant_2_events.json run05
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_4_run05.json D:\\DataSets\\EmotionalMario21\\truth\\participant_4_events.json run05
+D:\\DataSets\\EmotionalMario21\\runs\\team_random\\participant_7_run05.json D:\\DataSets\\EmotionalMario21\\truth\\participant_7_events.json run05"""
+
 def evaluate(run, truth, df, runid="undefined", filename="undefined", max_distance=25):
     # compare everyone with everything ...
     # print("run identifier, events in run, events in truth, avg. distance, precision, recall")
@@ -39,8 +55,8 @@ def evaluate(run, truth, df, runid="undefined", filename="undefined", max_distan
         curr_run_evt = None
         for run_evt in run:
             distance = abs(truth_evt['frame_number'] - run_evt['frame_number'])
-            if abs(truth_evt['frame_number'] - run_evt['frame_number']) < curr_dist:
-            # if abs(truth_evt['frame_number'] - run_evt['frame_number']) < curr_dist and truth_evt['event'] == run_evt['event']:
+            if abs(truth_evt['frame_number'] - run_evt['frame_number']) < curr_dist:  # use this line for just matching an arbitrary event
+            # if abs(truth_evt['frame_number'] - run_evt['frame_number']) < curr_dist and truth_evt['event'] == run_evt['event']:  # use this line for exact matches
                 curr_run_evt = truth_evt
                 curr_dist = distance
         if curr_run_evt is not None:  # add it to the list if it is considered a find
@@ -80,7 +96,7 @@ if __name__ == '__main__':
     # print("run identifier, file, events in run, events in truth, number of matches, avg. distance, precision, recall, f1 score")
     df = pd.DataFrame(columns="run identifier, file, events in run, events in truth, number of matches, avg. distance, precision, recall, f1 score".split(sep=", "))
     my_max_distance = 25
-    for input_path in infiles_dcu.split('\n'):
+    for input_path in infiles_random.split('\n'):
         tmp = input_path.strip().split()
 
         f1 = open(tmp[0])
@@ -100,6 +116,6 @@ if __name__ == '__main__':
     print(df.sort_values('run identifier').to_csv())
     print(evaluation.to_csv())
     # write results to file
-    file_header = 'team_dcu'
+    file_header = 'team_random'
     df.sort_values('run identifier').to_csv('%s_detailed_%s_frames.csv' % ((file_header, my_max_distance)), index=None)
     evaluation.to_csv('%s_overall_%s_frames.csv' % ((file_header, my_max_distance)))
